@@ -4,6 +4,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Camera from "../../screens/Camera";
 import Feather from "@expo/vector-icons/Feather";
 import Map from "../../screens/Map";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Chat from "../../screens/Chat";
+import ChatNavigation from "../ChatNav/ChatNavigation";
 
 const Tab = createBottomTabNavigator();
 const MainNavigation = () => {
@@ -11,12 +14,10 @@ const MainNavigation = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarStyle: { backgroundColor: "black" },
-        tabBarActiveTintColor: "yellow", // Selected tab item color
-        tabBarInactiveTintColor: "white", // Unselected tab item color
+        tabBarActiveTintColor: "yellow",
+        tabBarInactiveTintColor: "white",
         headerTransparent: true,
-        headerStyle: { backgroundColor: "transparent" }, // Transparent header
-        // headerTintColor: "white", // Adjust text/icon color for header
-        // headerTitleStyle: { fontWeight: "bold" },
+        headerStyle: { backgroundColor: "transparent" },
       })}
     >
       <Tab.Screen
@@ -25,6 +26,20 @@ const MainNavigation = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="map-pin" size={size} color={color} />
+          ),
+          title: "",
+        }}
+      />
+      <Tab.Screen
+        name="Chat"
+        component={ChatNavigation}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="message-reply-outline"
+              size={size}
+              color={color}
+            />
           ),
           title: "",
         }}

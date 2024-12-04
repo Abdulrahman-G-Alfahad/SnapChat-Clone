@@ -6,23 +6,27 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 
+const IconButton = ({ IconComponent, name, size, onPress, style }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.iconWrapper, style]}>
+    <IconComponent name={name} size={size} color="white" />
+  </TouchableOpacity>
+);
+
 export default function Camera() {
   const [facing, setFacing] = useState("back");
   const [permission, requestPermission] = useCameraPermissions();
 
   if (!permission) {
-    // Camera permissions are still loading.
-    return <View />;
+    return <View />; // Camera permissions are still loading
   }
 
   if (!permission.granted) {
-    // Camera permissions are not granted yet.
     return (
       <View style={styles.container}>
         <Text style={styles.message}>
           We need your permission to show the camera
         </Text>
-        <Button onPress={requestPermission} title="grant permission" />
+        <Button onPress={requestPermission} title="Grant Permission" />
       </View>
     );
   }
@@ -34,99 +38,47 @@ export default function Camera() {
   return (
     <View style={styles.container}>
       <CameraView style={styles.camera} facing={facing}>
-        <View
-          style={{
-            flexDirection: "row",
-            position: "absolute",
-            top: "5%",
-            left: "3%",
-          }}
-        >
-          <View
-            style={{
-              borderRadius: 15,
-              width: 30,
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
-            }}
-          >
-            <TouchableOpacity>
-              <MaterialCommunityIcons
-                name="face-man-profile"
-                size={30}
-                color="white"
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{ width: 10 }} />
-          <View
-            style={{
-              borderRadius: 15,
-              width: 30,
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
-            }}
-          >
-            <TouchableOpacity>
-              <Feather name="search" size={30} color="white" />
-            </TouchableOpacity>
-          </View>
+        {/* Left Header Section */}
+        <View style={styles.headerLeft}>
+          <IconButton
+            IconComponent={MaterialCommunityIcons}
+            name="face-man-profile"
+            size={30}
+          />
+          <IconButton IconComponent={Feather} name="search" size={30} />
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            position: "absolute",
-            top: "5%",
-            left: "87%",
-          }}
-        >
-          <View
-            style={{
-              borderRadius: 15,
-              width: 30,
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
-            }}
-          >
-            <TouchableOpacity>
-              <Entypo name="add-user" size={30} color="white" />
-            </TouchableOpacity>
-          </View>
-          <View style={{ width: 10 }} />
 
-          <View
-            style={{
-              borderRadius: 15,
-              width: 30,
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
-            }}
-          >
-            <TouchableOpacity onPress={toggleCameraFacing}>
-              <MaterialCommunityIcons
-                name="camera-flip-outline"
-                size={30}
-                color="white"
-              />
-            </TouchableOpacity>
-          </View>
+        {/* Right Header Section */}
+        <View style={styles.headerRight}>
+          <IconButton IconComponent={Entypo} name="add-user" size={30} />
+          <IconButton
+            IconComponent={MaterialCommunityIcons}
+            name="camera-flip-outline"
+            size={30}
+            onPress={toggleCameraFacing}
+          />
         </View>
+
+        {/* Bottom Button Container */}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity>
-            <Ionicons
-              name="images-outline"
-              size={30}
-              color="white"
-              style={{ marginBottom: 20, marginRight: 20 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Entypo name="circle" size={80} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Entypo
-              name="emoji-happy"
-              size={30}
-              color="white"
-              style={{ marginLeft: 20, marginBottom: 20 }}
-            />
-          </TouchableOpacity>
+          <IconButton
+            IconComponent={Ionicons}
+            name="images-outline"
+            size={30}
+            style={styles.sideButton}
+          />
+          <IconButton
+            IconComponent={Entypo}
+            name="circle"
+            size={80}
+            style={styles.captureButton}
+          />
+          <IconButton
+            IconComponent={Entypo}
+            name="emoji-happy"
+            size={30}
+            style={styles.sideButton}
+          />
         </View>
       </CameraView>
     </View>
@@ -145,13 +97,39 @@ const styles = StyleSheet.create({
   camera: {
     flex: 1,
   },
+  iconWrapper: {
+    marginHorizontal: 5,
+    borderRadius: 15,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    padding: 5,
+  },
+  headerLeft: {
+    flexDirection: "row",
+    position: "absolute",
+    top: "5%",
+    left: "3%",
+  },
+  headerRight: {
+    flexDirection: "row",
+    position: "absolute",
+    top: "5%",
+    right: "3%",
+  },
   buttonContainer: {
     flexDirection: "row",
-    position: "absolute", // Make the container position relative to the screen
-    bottom: "5%", // Adjust the distance from the bottom of the screen
-    left: "37%",
-    right: 0,
-    alignItems: "center", // Center the button horizontally
-    padding: 2,
+    position: "absolute",
+    bottom: "5%",
+    left: "20%",
+    right: "20%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  sideButton: {
+    marginBottom: 20,
+    backgroundColor: "rgba(0,0,0,0)",
+  },
+  captureButton: {
+    marginHorizontal: 15,
+    backgroundColor: "rgba(0,0,0,0)",
   },
 });

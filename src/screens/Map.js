@@ -3,100 +3,35 @@ import MapView from "react-native-maps";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
+
+const IconButton = ({ IconComponent, name, size, onPress }) => (
+  <TouchableOpacity onPress={onPress} style={styles.iconWrapper}>
+    <IconComponent name={name} size={size} color="white" />
+  </TouchableOpacity>
+);
 
 export default function Map() {
   return (
     <View style={styles.container}>
       <MapView style={styles.map} />
-      <View
-        style={{
-          flexDirection: "row",
-          position: "absolute",
-          top: "5%",
-          left: "3%",
-        }}
-      >
-        <View
-          style={{
-            borderRadius: 15,
-            backgroundColor: "rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          <TouchableOpacity>
-            <MaterialCommunityIcons
-              name="face-man-profile"
-              size={30}
-              color="white"
-              style={{ opacity: 1 }}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={{ width: 10 }} />
-        <View
-          style={{
-            borderRadius: 15,
-            backgroundColor: "rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          <TouchableOpacity style={{}}>
-            <Feather
-              name="search"
-              size={30}
-              color="white"
-              style={{ opacity: 1 }}
-            />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.headerLeft}>
+        <IconButton
+          IconComponent={MaterialCommunityIcons}
+          name="face-man-profile"
+          size={30}
+        />
+        <IconButton IconComponent={Feather} name="search" size={30} />
       </View>
-      <View style={{ position: "absolute", top: "5%", left: "42%" }}>
-        <Text style={{ color: "white", fontSize: 30, fontWeight: "bold" }}>
-          KUWAIT
-        </Text>
+
+      <View style={styles.headerCenter}>
+        <Text style={styles.headerTitle}>KUWAIT</Text>
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          position: "absolute",
-          top: "5%",
-          left: "87%",
-        }}
-      >
-        <View
-          style={{
-            borderRadius: 15,
-            width: 30,
-            backgroundColor: "rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          <TouchableOpacity>
-            <Entypo
-              name="add-user"
-              size={30}
-              color="white"
-              style={{ opacity: 1 }}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={{ width: 10 }} />
-        <View
-          style={{
-            borderRadius: 15,
-            width: 30,
-            backgroundColor: "rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          <TouchableOpacity>
-            <AntDesign
-              name="setting"
-              size={33}
-              color="white"
-              style={{ opacity: 1 }}
-            />
-          </TouchableOpacity>
-        </View>
+
+      <View style={styles.headerRight}>
+        <IconButton IconComponent={Entypo} name="add-user" size={30} />
+        <IconButton IconComponent={AntDesign} name="setting" size={30} />
       </View>
     </View>
   );
@@ -109,5 +44,33 @@ const styles = StyleSheet.create({
   map: {
     width: "100%",
     height: "100%",
+  },
+  headerLeft: {
+    flexDirection: "row",
+    position: "absolute",
+    top: "5%",
+    left: "3%",
+  },
+  headerCenter: {
+    position: "absolute",
+    top: "5%",
+    left: "43%",
+  },
+  headerRight: {
+    flexDirection: "row",
+    position: "absolute",
+    top: "5%",
+    right: "3%",
+  },
+  headerTitle: {
+    color: "white",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  iconWrapper: {
+    marginHorizontal: 5,
+    borderRadius: 15,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    padding: 5,
   },
 });
