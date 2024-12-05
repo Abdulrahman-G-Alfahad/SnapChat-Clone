@@ -6,8 +6,10 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import MessageItemBox from "../components/MessageItemBox";
 
 const IconButton = ({ IconComponent, name, size, onPress, style }) => (
   <TouchableOpacity onPress={onPress} style={[styles.iconButton, style]}>
@@ -15,23 +17,34 @@ const IconButton = ({ IconComponent, name, size, onPress, style }) => (
   </TouchableOpacity>
 );
 
-const SingleChat = () => {
+const SingleChat = ({ route }) => {
+  const { chat } = route.params;
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Image
-            source={{ uri: "https://via.placeholder.com/40" }}
-            style={styles.profileImage}
-          />
+          <Image source={{ uri: chat.image }} style={styles.profileImage} />
           <View>
-            <Text style={styles.username}>Username</Text>
+            <Text style={styles.username}>{chat.username}</Text>
             <Text style={styles.time}>7h ago</Text>
           </View>
         </View>
         <IconButton IconComponent={Feather} name="more-vertical" size={24} />
       </View>
+
+      {/* Message Display Section */}
+      <ScrollView style={styles.messagesContainer}>
+        {chat.chats?.map((message, index) => (
+          <MessageItemBox
+            key={
+              message.id + " " + message.username ||
+              index + " " + message.username
+            }
+            message={message}
+          />
+        ))}
+      </ScrollView>
 
       {/* Text Input Section */}
       <View style={styles.textBoxContainer}>
@@ -47,7 +60,9 @@ const SingleChat = () => {
           placeholderTextColor="#8E8E8E"
         />
         <View style={styles.rightIcons}>
-          <IconButton IconComponent={Feather} name="camera" size={24} />
+          <TouchableOpacity>
+            <IconButton IconComponent={Feather} name="camera" size={24} />
+          </TouchableOpacity>
           <IconButton IconComponent={Feather} name="send" size={24} />
         </View>
       </View>
@@ -59,6 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingTop: "5%",
   },
   header: {
     flexDirection: "row",
@@ -66,9 +82,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 12,
     paddingVertical: 8,
-    position: "absolute",
-    top: "5%",
-    width: "100%",
     borderBottomWidth: 0.5,
     borderBottomColor: "#DBDBDB",
   },
@@ -91,15 +104,20 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#8E8E8E",
   },
+  messagesContainer: {
+    flex: 1,
+    marginTop: 12,
+    paddingHorizontal: 12,
+    paddingBottom: 60,
+  },
   textBoxContainer: {
     flexDirection: "row",
     alignItems: "center",
+    padding: 8,
     borderRadius: 20,
-    paddingHorizontal: 12,
     marginHorizontal: 12,
-    marginBottom: 0,
     position: "absolute",
-    bottom: "5%",
+    bottom: 16,
   },
   leftIcon: {
     marginRight: 8,
@@ -109,11 +127,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#262626",
     borderRadius: 25,
-    backgroundColor: "#F5F5F5",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
     marginHorizontal: 8,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    backgroundColor: "#FFF",
+    backgroundColor: "#F5F5F5",
     elevation: 2,
   },
   rightIcons: {

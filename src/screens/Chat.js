@@ -11,6 +11,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import ChatItemBox from "../components/ChatItemBox";
+import chatsData from "../../data/chatsData";
 
 const Chat = () => {
   return (
@@ -43,12 +44,9 @@ const Chat = () => {
       {/* Content Section */}
       <ScrollView style={styles.content}>
         <View style={styles.chatList}>
-          <ChatItemBox />
-          <ChatItemBox />
-          <ChatItemBox />
-          <ChatItemBox />
-          <ChatItemBox />
-          <ChatItemBox />
+          {chatsData?.map((chat) => (
+            <ChatItemBox chat={chat} />
+          ))}
         </View>
       </ScrollView>
     </View>
