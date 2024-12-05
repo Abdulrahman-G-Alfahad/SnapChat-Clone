@@ -7,8 +7,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <MainNavigation />
-
-      <View>{/* <StatusBar style="auto" /> */}</View>
     </NavigationContainer>
   );
 }
