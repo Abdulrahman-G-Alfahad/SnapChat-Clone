@@ -1,9 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const DiscoverVideoCard = ({ card }) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.cardContainer}>
+    <TouchableOpacity
+      style={styles.cardContainer}
+      onPress={() => navigation.navigate("MediaViewer", { card: card })}
+    >
       <View style={styles.imageWrapper}>
         <Image
           source={{ uri: card.image }}

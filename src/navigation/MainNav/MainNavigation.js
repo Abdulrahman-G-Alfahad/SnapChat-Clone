@@ -10,12 +10,14 @@ import ChatNavigation from "../ChatNav/ChatNavigation";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Discover from "../../screens/Discover";
 import Stories from "../../screens/Stories";
+import MediaNavigation from "../MediaNav/MediaNavigation";
 
 const Tab = createBottomTabNavigator();
 const MainNavigation = () => {
   const [color, setColor] = useState("yellow");
   return (
     <Tab.Navigator
+      initialRouteName="Camera"
       screenOptions={({ route }) => ({
         tabBarStyle: { backgroundColor: "black" },
         tabBarActiveTintColor: color,
@@ -61,7 +63,7 @@ const MainNavigation = () => {
 
       <Tab.Screen
         name="Users"
-        component={Stories}
+        component={MediaNavigation}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <Feather name="users" size={size} color={color} />;
