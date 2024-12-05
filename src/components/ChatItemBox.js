@@ -2,19 +2,20 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const ChatItemBox = () => {
+const ChatItemBox = ({ chat }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={styles.cardContainer}
-      onPress={() => navigation.navigate("Single Chat")}
+      onPress={() =>
+        navigation.navigate("Single Chat", {
+          chat: chat,
+        })
+      }
     >
-      <Image
-        source={{ uri: "https://via.placeholder.com/50" }}
-        style={styles.image}
-      />
+      <Image source={{ uri: chat.image }} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text style={styles.name}>Name</Text>
+        <Text style={styles.name}>{chat.username}</Text>
         <Text style={styles.details}>Details</Text>
       </View>
     </TouchableOpacity>

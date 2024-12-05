@@ -33,7 +33,7 @@ const MainNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Chat"
+        name="Chats"
         component={ChatNavigation}
         options={{
           tabBarIcon: ({ color, size }) => (
