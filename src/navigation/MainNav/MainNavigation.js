@@ -58,6 +58,17 @@ const MainNavigation = () => {
           title: "",
         }}
       />
+
+      <Tab.Screen
+        name="Users"
+        component={Stories}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <Feather name="users" size={size} color={color} />;
+          },
+          title: "",
+        }}
+      />
       <Tab.Screen
         name="Discover"
         component={Discover}
@@ -65,16 +76,6 @@ const MainNavigation = () => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="play-outline" size={size} color={color} />
           ),
-          title: "",
-        }}
-      />
-      <Tab.Screen
-        name="Users"
-        component={Stories}
-        options={{
-          tabBarIcon: () => {
-            return <Feather name="users" size={24} color="white" />;
-          },
           title: "",
         }}
       />

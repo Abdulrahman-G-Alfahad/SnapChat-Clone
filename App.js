@@ -7,13 +7,7 @@ import Stories from "./src/screens/Stories";
 export default function App() {
   return (
     <NavigationContainer>
-     
       <MainNavigation />
-<<<<<<< HEAD
-=======
-{/* <Stories/> */}
-
->>>>>>> main
     </NavigationContainer>
   );
 }
