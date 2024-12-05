@@ -7,6 +7,8 @@ import Map from "../../screens/Map";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Chat from "../../screens/Chat";
 import ChatNavigation from "../ChatNav/ChatNavigation";
+import Stories from "../../screens/Stories";
+
 
 const Tab = createBottomTabNavigator();
 const MainNavigation = () => {
@@ -51,6 +53,16 @@ const MainNavigation = () => {
           tabBarIcon: ({ color, size }) => (
             <Feather name="camera" size={size} color={color} />
           ),
+          title: "",
+        }}
+      />
+      <Tab.Screen
+        name="Users"
+        component={Stories}
+        options={{
+          tabBarIcon: () => {
+            return <Feather name="users" size={24} color="white" />;
+          },
           title: "",
         }}
       />
