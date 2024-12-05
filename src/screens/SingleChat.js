@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import MessageItemBox from "../components/MessageItemBox";
+import { useNavigation } from "@react-navigation/native";
 
 const IconButton = ({ IconComponent, name, size, onPress, style }) => (
   <TouchableOpacity onPress={onPress} style={[styles.iconButton, style]}>
@@ -18,10 +19,10 @@ const IconButton = ({ IconComponent, name, size, onPress, style }) => (
 );
 
 const SingleChat = ({ route }) => {
+  const navigation = useNavigation();
   const { chat } = route.params;
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <Image source={{ uri: chat.image }} style={styles.profileImage} />
@@ -33,7 +34,6 @@ const SingleChat = ({ route }) => {
         <IconButton IconComponent={Feather} name="more-vertical" size={24} />
       </View>
 
-      {/* Message Display Section */}
       <ScrollView style={styles.messagesContainer}>
         {chat.chats?.map((message, index) => (
           <MessageItemBox
@@ -46,7 +46,6 @@ const SingleChat = ({ route }) => {
         ))}
       </ScrollView>
 
-      {/* Text Input Section */}
       <View style={styles.textBoxContainer}>
         <IconButton
           IconComponent={Feather}
@@ -60,9 +59,13 @@ const SingleChat = ({ route }) => {
           placeholderTextColor="#8E8E8E"
         />
         <View style={styles.rightIcons}>
-          <TouchableOpacity>
-            <IconButton IconComponent={Feather} name="camera" size={24} />
-          </TouchableOpacity>
+          <IconButton
+            IconComponent={Feather}
+            name="camera"
+            size={24}
+            onPress={() => navigation.navigate("Camera")}
+          />
+
           <IconButton IconComponent={Feather} name="send" size={24} />
         </View>
       </View>
