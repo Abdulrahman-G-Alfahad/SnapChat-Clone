@@ -9,6 +9,7 @@ import Chat from "../../screens/Chat";
 import ChatNavigation from "../ChatNav/ChatNavigation";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Discover from "../../screens/Discover";
+import Stories from "../../screens/Stories";
 
 const Tab = createBottomTabNavigator();
 const MainNavigation = () => {
@@ -64,6 +65,16 @@ const MainNavigation = () => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="play-outline" size={size} color={color} />
           ),
+          title: "",
+        }}
+      />
+      <Tab.Screen
+        name="Users"
+        component={Stories}
+        options={{
+          tabBarIcon: () => {
+            return <Feather name="users" size={24} color="white" />;
+          },
           title: "",
         }}
       />

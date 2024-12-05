@@ -1,12 +1,19 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import MainNavigation from "./src/navigation/MainNav/MainNavigation";
+import Stories from "./src/screens/Stories";
 
 export default function App() {
   return (
     <NavigationContainer>
+     
       <MainNavigation />
+<<<<<<< HEAD
+=======
+{/* <Stories/> */}
+
+>>>>>>> main
     </NavigationContainer>
   );
 }
