@@ -70,7 +70,7 @@ export default function Stories() {
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView>
+      <ScrollView style={{ top: "8%" }} showsVerticalScrollIndicator={false}>
         <View>
           <Text style={styles.friendsText}>Friends</Text>
           <FlatList

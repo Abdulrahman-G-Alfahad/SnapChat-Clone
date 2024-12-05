@@ -7,7 +7,7 @@ const FollowingStories = [
   },
   {
     id: 2,
-    followeryName: "Abdula",
+    followerName: "Abdula",
     followerImage:
       "https://i.pinimg.com/474x/2a/07/36/2a0736b064272c56efdd8b482448964e.jpg",
   },
