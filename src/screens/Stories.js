@@ -6,6 +6,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import FriendsStories from "../data/FriendsStories";
 import FollowingStories from "../data/FollowindStories";
@@ -21,11 +22,13 @@ export default function Stories() {
 
   const renderFollowerCard = ({ item }) => (
     <TouchableOpacity style={styles.followerCard}>
-      <Image
-        source={{ uri: item.followerImage }}
-        style={styles.followerImage}
-      />
-      <Text style={styles.followerText}>{item.followerName}</Text>
+      <View style={styles.imageWrapper}>
+        <Image
+          source={{ uri: item.followerImage }}
+          style={styles.followerImage}
+        />
+        <Text style={styles.followerText}>{item.followerName}</Text>
+      </View>
     </TouchableOpacity>
   );
 
@@ -59,15 +62,17 @@ export default function Stories() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.list}
       />
-      <Text style={styles.discoverText}>Discover</Text>
-      <FlatList
-        data={DiscoverStories}
-        renderItem={renderDiscoverCard}
-        keyExtractor={(item) => item.id.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.list}
-      />
+      <ScrollView>
+        <Text style={styles.discoverText}>Discover</Text>
+        <FlatList
+          data={DiscoverStories}
+          renderItem={renderDiscoverCard}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.list}
+        />
+      </ScrollView>
     </View>
   );
 }
@@ -135,20 +140,27 @@ const styles = StyleSheet.create({
     marginRight: 15,
     height: 100,
   },
+  imageWrapper: {
+    position: "relative", 
+  },
   followerImage: {
     width: 95,
     height: 150,
-    // borderRadius: 30,
-    // borderWidth: 2,
-    borderColor: "gray",
     marginBottom: 5,
     borderRadius: 10,
   },
   followerText: {
-    fontSize: 12,
-    fontWeight: "600",
-    textAlign: "center",
-    color: "#333",
+    position: "absolute",
+    bottom: 10, 
+    left: 10, 
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "white",
+    alignContent:"center",
+    textShadowColor: "rgba(0, 0, 0, 0.5)", 
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+    
   },
   discoverCard: {
     alignItems: "center",
@@ -162,3 +174,4 @@ const styles = StyleSheet.create({
     borderColor: "blue",
   },
 });
+
