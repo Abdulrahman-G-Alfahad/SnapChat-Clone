@@ -1,19 +1,20 @@
+import React from "react";
 import {
   StyleSheet,
+  Text,
   View,
   TouchableOpacity,
-  Text,
-  ScrollView,
+  FlatList,
 } from "react-native";
-import React from "react";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Feather from "@expo/vector-icons/Feather";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import ChatItemBox from "../components/ChatItemBox";
-import chatsData from "../../data/chatsData";
+import DiscoverVideoCard from "../components/DiscoverVideoCard";
+import discoverCards from "../../data/discoverCards";
 
-const Chat = () => {
+const Discover = () => {
+  const renderItem = ({ item }) => <DiscoverVideoCard card={item} />;
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -29,34 +30,34 @@ const Chat = () => {
             <Feather name="search" size={30} color="white" />
           </TouchableOpacity>
         </View>
-        <Text style={styles.headerTitle}>Chat</Text>
+        <Text style={styles.headerTitle}>Discover</Text>
         <View style={styles.headerRight}>
           <TouchableOpacity style={styles.iconWrapper}>
             <Entypo name="add-user" size={30} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconWrapper}>
-            <AntDesign name="setting" size={30} color="white" />
-          </TouchableOpacity>
         </View>
       </View>
 
-      <ScrollView style={styles.content}>
-        <View style={styles.chatList}>
-          {chatsData?.map((chat) => (
-            <ChatItemBox key={chat.id} chat={chat} />
-          ))}
-        </View>
-      </ScrollView>
+      <Text style={styles.headerTwo}>For you</Text>
+      <FlatList
+        data={discoverCards}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
+        contentContainerStyle={styles.flatListContainer}
+        columnWrapperStyle={styles.flatListColumn}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 };
 
-export default Chat;
+export default Discover;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "black",
   },
   header: {
     position: "absolute",
@@ -86,13 +87,22 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "black",
+    color: "white",
   },
-  content: {
-    flex: 1,
+  headerTwo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "white",
     marginTop: "15%",
+    marginBottom: 10,
+    marginLeft: "2%",
   },
-  chatList: {
-    paddingHorizontal: 15,
+  flatListContainer: {
+    paddingHorizontal: 8,
+    paddingBottom: 16,
+  },
+  flatListColumn: {
+    justifyContent: "space-between",
+    marginBottom: 12,
   },
 });
